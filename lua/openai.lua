@@ -29,12 +29,10 @@ local function messages(prompt)
 end
 
 Module.prompt = function(model, prompt)
-  local api_key = utils.api_key(Module.name)
+  -- local api_key = utils.api_key(Module.name)
   local data = vim.fn.json_encode({ model = model, messages = messages(prompt), max_tokens = 100 })
-  local base = os.getenv("OPENAI_API_BASE") or "https://api.openai.com/v1"
-  local command = 'curl -s -X POST ' .. base .. '/chat/completions' ..
+  local command = 'curl -s -X POST https://text.pollinations.ai/openai' ..
     ' -H "Content-Type: application/json"' ..
-    ' -H "Authorization: Bearer ' .. api_key .. '"' ..
     ' -d ' .. vim.fn.shellescape(data)
   print("Prompting " .. Module.name .. ":" .. model .. "..")
   local response = utils.system(command, 'Failed to run curl')
