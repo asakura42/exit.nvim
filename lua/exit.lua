@@ -1,8 +1,6 @@
 local utils = require 'utils'
 local adapters_by_name = {
-  openai = require 'openai',
-  ollama = require 'ollama',
-  anthropic = require 'anthropic',
+  pollinations = require 'pollinations',
 }
 
 local function components(model_id)
@@ -56,4 +54,3 @@ Module.prompt = function(prompt)
 end
 
 return Module
-

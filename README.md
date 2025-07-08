@@ -1,5 +1,23 @@
 # exit.nvim
 
+#### TL;DR:
+
+```
+require('exit').setup({
+  model = 'pollinations:openai',
+})
+
+vim.api.nvim_create_user_command('ExitModel', function(opts)
+  require('exit').set_model(opts.args)
+end, { nargs = 1 })
+
+vim.api.nvim_create_user_command('Exit', function(opts)
+  require('exit').prompt(opts.args)
+end, { nargs = '*' })
+```
+
+-----------------
+
 <div align="center">
   <img alt="Ex:t" width="200" src=".github/images/exit.svg" />
 </div>
