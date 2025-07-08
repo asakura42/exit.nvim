@@ -31,7 +31,8 @@ end
 Module.prompt = function(model, prompt)
   local api_key = utils.api_key(Module.name)
   local data = vim.fn.json_encode({ model = model, messages = messages(prompt), max_tokens = 100 })
-  local command = 'curl -s -X POST https://api.openai.com/v1/chat/completions' ..
+  local base = os.getenv("OPENAI_API_BASE") or "https://api.openai.com/v1"
+  local command = 'curl -s -X POST ' .. base .. '/chat/completions' ..
     ' -H "Content-Type: application/json"' ..
     ' -H "Authorization: Bearer ' .. api_key .. '"' ..
     ' -d ' .. vim.fn.shellescape(data)
